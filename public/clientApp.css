@@ -1,4 +1,4 @@
-body {
+*body {
   padding-top: 30px;
   padding-bottom: 80px;
   font-size: 20px;
@@ -8,7 +8,7 @@ body {
 
 li {
   padding: 5px;
-  /*padding-bottom: 5px;*/
+  padding-bottom: 5px;
 }
 
 li:nth-child(odd) {

@@ -1,6 +1,6 @@
 var express = require('express');
 var app     = express();
-var server  = require('http').createServer(app);
+ var server  = require('http').createServer(app);
 var io      = require('socket.io')(server);
 
 //Add recent chats to messages array
@@ -13,8 +13,8 @@ var storeMessage = function(name, data){
   }
 };
 
-//Setup the app with Express
-app.use(express.static(__dirname + '/public'));
+// //Setup the app with Express
+ app.use(express.static(__dirname + '/public'));
 
 //Socket.io
 io.on('connection', function(socket){
@@ -23,12 +23,12 @@ io.on('connection', function(socket){
   socket.on('join', function(name){
     socket.userName = name;
     socket.broadcast.emit('chat', name + ' has joined the chat');
-    console.log(name + ' has joined the chat');
+    //console.log(name + ' has joined the chat');
 
     //Log who has left
     socket.on('disconnect', function(){
       socket.broadcast.emit('chat', name + ' has left the chat');
-      console.log(name + ' has left the chat');
+      //console.log(name + ' has left the chat');
     });
   });
 
@@ -36,14 +36,14 @@ io.on('connection', function(socket){
   socket.on('chat', function(message){
     io.emit('chat', socket.userName + ': ' + message);
     storeMessage(socket.userName, message);
-    console.log(socket.userName + ': ' + message);
+    //console.log(socket.userName + ': ' + message);
   });
 
   //Log previous chats for new users
   messages.forEach(function(message){
     socket.emit('chat', message.name + ': ' + message.data);
   });
-});
+ });
 
 //Listen at localhost:3000
 server.listen(3000, function(){

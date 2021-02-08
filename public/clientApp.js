@@ -32,5 +32,5 @@
         scrollTop: $(document).height()
       });
     });
-  });
-})(jQuery);
+   });
+ })(jQuery);
